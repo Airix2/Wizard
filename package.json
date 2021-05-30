@@ -1,0 +1,30 @@
+{
+  "name": "wizard",
+  "version": "1.0.0",
+  "description": "Online browser version of wizard",
+  "main": "server",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Airix2/wizard.git"
+  },
+  "keywords": [
+    "Wizard",
+    "online",
+    "card",
+    "game"
+  ],
+  "author": "Airix2",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Airix2/wizard/issues"
+  },
+  "homepage": "https://github.com/Airix2/wizard#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "moment": "^2.29.1",
+    "socket.io": "^4.1.2"
+  }
+}
