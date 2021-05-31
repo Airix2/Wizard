@@ -3,43 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- FONT AWESOME maybe delete -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" 
         integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+
+    <!-- BOOTSTRAP -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" 
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="css/style.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    
+    <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js" 
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="C:\Users\Alex\Documents\Javascript Node\Wizard\public\css\style.css" type="text/css">
+
     <title>Wizard App</title>
 </head>
 <body>
-    <div class="chat-container">
-        <header class="chat-header">
-        <h1><i class="fas fa-smile"></i> Wizard</h1>
-        <a href="index.html" class="btn">Leave Room</a>
-        </header>
-        <main class="chat-main">
-            <div class="chat-sidebar">
-                <h3><i class="fas fa-comments"></i> Room Name:</h3>
-                <h2 id="room-name"></h2>
-                <h3><i class="fas fa-users"></i> Users</h3>
-                <ul id="users"></ul>
+    <div class="container-flex vh-100" style="background-color: #254b62;">
+        <div class="row mx-0" style="height: 5vh; background-color: #1d3e53;">
+            <div class="col-12 py-2 text-center">
+                <p class="h4">WIZARD GAME</p>
             </div>
-            <div class="chat-messages">
+        </div>
+        <div class="row mx-0 py-4 center-all" style="height: 30vh;">
+            <div class="col-2">
+                <p>Trump</p>
+                <img src="C:\Users\Alex\Documents\Javascript Node\Wizard\public\assets\cards\c1.png" class="img-thumbnail rounded w-100"  style="height: 200px; max-width: 150px">
             </div>
-        </main>
-        <div class="chat-form-container">
-            <form id="chat-form">
-                <input
-                id="msg"
-                type="text"
-                placeholder="Enter Message"
-                required
-                autocomplete="off"
-                />
-                <button class="btn"><i class="fas fa-paper-plane"></i>Send</button>
-            </form>
+        </div>
+        <div class="row mx-0 py-4 center-all" style="height: 30vh;">
+            <div class="col-2">
+                <p>Players</p>
+                <img src="C:\Users\Alex\Documents\Javascript Node\Wizard\public\assets\cards\c1.png" class="img-thumbnail rounded w-100" style="height: 200px; max-width: 150px">
+            </div>
+            <div class="col-2">
+                <p>Players</p>
+                <img src="C:\Users\Alex\Documents\Javascript Node\Wizard\public\assets\cards\c1.png" class="img-thumbnail rounded w-100" style="height: 200px; max-width: 150px">
+            </div>
+            <div class="col-2">
+                <p>Players</p>
+                <img src="C:\Users\Alex\Documents\Javascript Node\Wizard\public\assets\cards\c1.png" class="img-thumbnail rounded w-100" style="height: 200px; max-width: 150px">
+            </div>
+        </div>
+
+        <div class="row mx-0 py-4 center-all align-items-end py-3" style="height: 35vh;">
+            <div class="col-10">
+                CARDS HERE (algo para poner scroll o un carrusel idk)
+            </div>
         </div>
     </div>
 

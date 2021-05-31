@@ -1,0 +1,10 @@
+.fill-height { flex-grow: 1; width: 100%; }
+
+.center-all {
+	justify-content: center !important;
+	text-align: center;
+}
+
+body {
+	color: white;
+}
