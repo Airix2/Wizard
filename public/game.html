@@ -19,44 +19,48 @@
         integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     
     <!-- CSS -->
-    <link rel="stylesheet" href="C:\Users\Alex\Documents\Javascript Node\Wizard\public\css\style.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
 
-    <title>Wizard App</title>
+    <title>Wizard</title>
 </head>
 <body>
     <div class="container-flex vh-100" style="background-color: #254b62;">
         <div class="row mx-0" style="height: 5vh; background-color: #1d3e53;">
-            <div class="col-12 py-2 text-center">
-                <p class="h4">WIZARD GAME</p>
+            <div class="col py-2 text-center">
+                <p class="h4">Username</p>
+            </div>
+            <div class="col py-2 text-center">
+                <p class="h4" id="roomName"></p>
+            </div>
+            <div class="col py-2 text-center">
+                <p class="h4">Leave Room</p>
             </div>
         </div>
         <div class="row mx-0 center-all" style="height: 30vh;">
             <div class="col-2 pt-2">
-                <label class="d-block">Players</label>
-                <img src="C:\Users\Alex\Documents\Javascript Node\Wizard\public\assets\cards\c1.png" class="img-thumbnail rounded w-100"  style="height: 200px; max-width: 150px">
+                <label class="d-block">Trump</label>
+                <img src="assets/cards/c1.png" class="img-thumbnail rounded w-100"  style="height: 200px; max-width: 150px">
             </div>
         </div>
-        <div class="row mx-0 center-all" style="height: 30vh;">
-            <div class="col-2 border border-white">
+        <div class="row mx-0 center-all" style="height: 30vh;" id="playerSpace">
+            <!-- <div class="col-2">
                 <label class="d-block my-0">Players</label>
-                <label class="d-block">Bets here</label>    
-                <img src="C:\Users\Alex\Documents\Javascript Node\Wizard\public\assets\cards\c1.png" class="img-thumbnail rounded w-100" style="height: 200px; max-width: 150px">
-            </div>
-            <div class="col-2">
-                <label class="d-block my-0">Players</label>
-                <label class="d-block">Bets here</label>    
-                <img src="C:\Users\Alex\Documents\Javascript Node\Wizard\public\assets\cards\c1.png" class="img-thumbnail rounded w-100" style="height: 200px; max-width: 150px">
-            </div>
-            <div class="col-2">
-                <label class="d-block my-0">Players</label>
-                <label class="d-block">Bets here</label>    
-                <img src="C:\Users\Alex\Documents\Javascript Node\Wizard\public\assets\cards\c1.png" class="img-thumbnail rounded w-100" style="height: 200px; max-width: 150px">
-            </div>
+                <div class="d-block bets">
+                    <span class="dot bet-green"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+                <img src="assets/cards/c1.png" class="img-thumbnail rounded w-100" style="height: 200px; max-width: 150px">
+            </div> -->
         </div>
 
-        <div class="row mx-0 center-all align-items-end" style="height: 35vh;">
+        <div class="row mx-0 center-all align-items-center" style="height: 35vh;">
             <div class="col-10">
-                CARDS HERE (algo para poner scroll o un carrusel idk)
+            </div>
+            <div class="col-2">
+                <button class="btn btn-light my-2" id="start">Start Game</button>
+                <input type="number" id="bet-text">
+                <button class="btn btn-light" id="enterBet">Bet</button>
             </div>
         </div>
     </div>

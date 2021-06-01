@@ -1,6 +1,7 @@
 const chatForm = document.getElementById('chat-form');
-const roomName = $('#room-name');
-const usersList = document.getElementById('users');
+const roomName = $('#roomName');
+const playerSpace = $('#playerSpace');
+const playerEnterBet = $('#enterBet');
 //const chatMessages = document.querySelector('.chat-messages');
 
 // Get username and room from URL
@@ -20,12 +21,25 @@ socket.on('roomUsers', ({ room, users}) => {
 // Message from server
 socket.on('message', message => {
     console.log(message);
-    outputMessage(message);
+    //outputMessage(message);
 
     // Scroll down
     let height = $('.chat-messages').prop('scrollHeight');
     $('.chat-messages').scrollTop(height);
     //chatMessages.scrollTop = chatMessages.scrollHeight;
+})
+
+// Message from server
+socket.on('betChange', user => {
+    let bet = user.bet;
+    console.log(bet);
+
+    // Scroll down
+    let betDiv = $(`#${user.username}`).find(".bets");
+    betDiv.html('');
+    for (let i = 0; i < bet; i++) {
+        betDiv.append(`<span class="dot"></span>`);
+    }
 })
 
 
@@ -60,12 +74,32 @@ function outputMessage(message){
 
 // Output Roomname to DOM
 function outputRoomName(room){
-    roomName.text(room);
+    roomName.text("WIZARD: "+room);
 }
 
-// Output message to DOM
+// Output Users Space to DOM
 function outputUsers(users){
-    usersList.innerHTML = `${users.map(user => `<li>${user.username}</li>`).join('')}`;
-    console.log(usersList);
-    
+    playerSpace.html("");
+    users.forEach(user => {
+        let playerhtml = playerSpace.html();
+        playerSpace.html(playerhtml + `<div class="col-2" id="${user.username}">
+        <label class="d-block my-0">${user.username}</label>
+        <div class="d-block bets"></div>
+        <img src="assets/cards/c1.png" class="img-thumbnail rounded w-100" style="height: 200px; max-width: 150px">
+        </div>`);
+    });
 }
+
+// Message submit
+$('#enterBet').on('click', function(event){
+    let betHTML = $('#bet-text');
+    let betAmount = betHTML.val();
+    console.log(betAmount);
+    if (betAmount > 20) {betAmount = 20;}
+
+    // Emit a message to server
+    socket.emit('enterBet', betAmount);
+
+    // Clear input
+    betHTML.val("");
+});

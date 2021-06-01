@@ -8,3 +8,14 @@
 body {
 	color: white;
 }
+
+.dot {
+	height: 10px;
+	width: 10px;
+	background-color: #bbb;
+	border-radius: 50%;
+	display: inline-block;
+}
+.bet-green {
+	background-color: rgb(26, 236, 26);
+}
