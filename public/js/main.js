@@ -2,6 +2,7 @@ const chatForm = document.getElementById('chat-form');
 const roomName = $('#roomName');
 const playerSpace = $('#playerSpace');
 const playerEnterBet = $('#enterBet');
+let Deck = [];
 //const chatMessages = document.querySelector('.chat-messages');
 
 // Get username and room from URL
@@ -17,6 +18,17 @@ socket.on('roomUsers', ({ room, users}) => {
     outputRoomName(room);
     outputUsers(users); 
 });
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
+
+// MESSAGES FROM SERVER!!!!!!!!!!!!
+
 
 // Message from server
 socket.on('message', message => {
@@ -41,6 +53,21 @@ socket.on('betChange', user => {
         betDiv.append(`<span class="dot"></span>`);
     }
 })
+
+// Message from server
+socket.on('startGame', users => {
+    Deck = [];
+    for (let i = 0; i < 60; i++) {
+        Deck.push({cardID: i, img: `Image${i}.png`});
+    }
+    //shuffle
+    shuffleArray(Deck);
+    console.log(Deck);
+})
+
+
+
+// MESSAGES FROM USER!!!!!!!!!!!!
 
 
 // Message submit
@@ -90,7 +117,7 @@ function outputUsers(users){
     });
 }
 
-// Message submit
+// Enter Bet click
 $('#enterBet').on('click', function(event){
     let betHTML = $('#bet-text');
     let betAmount = betHTML.val();
@@ -102,4 +129,10 @@ $('#enterBet').on('click', function(event){
 
     // Clear input
     betHTML.val("");
+});
+
+// Start Game click
+$('#start').on('click', function(event){
+    // Emit a message to server
+    socket.emit('startRequest', room);
 });

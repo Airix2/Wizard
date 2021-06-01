@@ -52,6 +52,12 @@ io.on('connection', socket => {
         io.to(user.room).emit('betChange', user);
     });
 
+    // Listen for a bet Enter
+    socket.on('startRequest', room => {
+        let users = getRoomUsers(room);
+        io.to(room).emit('startGame', users);
+    });
+
     // Broadcast to everybody when a user disconnects
     socket.on('disconnect', () => {
         const user = userLeave(socket.id);
