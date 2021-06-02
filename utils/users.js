@@ -35,8 +35,8 @@ function getRoomUsers(room) {
 
 function startGame(room) {
     Deck = [];
-    for (let i = 0; i < 60; i++) {
-        Deck.push({cardID: i, img: `Image${i}.png`});
+    for (let i = 1; i <= 60; i++) {
+        Deck.push({ID: i, img: `Image${i}.png`});
     }
     //shuffle
     shuffleArray(Deck);

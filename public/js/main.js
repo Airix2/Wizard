@@ -58,7 +58,7 @@ socket.on('drawHands', ({users, trump}) => {
 
     playerHand.empty();
     cards.forEach(card => {
-        playerHand.append(`<img src="assets/cards/${card.img}" class="img-thumbnail rounded w-100" style="height: 200px; max-width: 150px">
+        playerHand.append(`<img src="assets/cards/${card.img}" class="img-thumbnail rounded w-100 handCards" id="${card.ID}" style="height: 200px; max-width: 150px">
         `);
     });
     $("#trumpImg").attr("src", `assets/cards/${trump.img}`);
@@ -136,3 +136,14 @@ $('#start').on('click', function(event){
     socket.emit('startRequest', room);
 });
 
+// Clicked on Card
+$('body').on('click', 'img.handCards', function() {
+        // Emit a message to server
+        let imgdiv = $(`#${username}`).children('img');
+        let imgsrc = $(this).attr("src");
+        let cardID = $(this).attr("id");
+        imgdiv.attr("src", imgsrc);
+        $(this).remove();
+        console.log(username, cardID);
+        socket.emit('cardClicked', {room, username, cardID});
+});
