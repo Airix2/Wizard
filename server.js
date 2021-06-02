@@ -3,7 +3,8 @@ const path = require('path');
 const http = require('http');
 const socketio = require('socket.io');
 const formatMessage = require('./utils/messages');
-const { userJoin, getCurrentUser, userLeave, getRoomUsers } = require('./utils/users');
+const { userJoin, getCurrentUser, userLeave, getRoomUsers, startGame } = require('./utils/users');
+let Deck = [];
 
 const app = express();
 const server = http.createServer(app);
@@ -54,8 +55,8 @@ io.on('connection', socket => {
 
     // Listen for a bet Enter
     socket.on('startRequest', room => {
-        let users = getRoomUsers(room);
-        io.to(room).emit('startGame', users);
+        let trump = startGame(room); 
+        io.to(room).emit('drawHands', {users: getRoomUsers(room), trump: trump});
     });
 
     // Broadcast to everybody when a user disconnects
@@ -71,3 +72,4 @@ io.on('connection', socket => {
         }
     });
 })
+

@@ -2,7 +2,9 @@ const chatForm = document.getElementById('chat-form');
 const roomName = $('#roomName');
 const playerSpace = $('#playerSpace');
 const playerEnterBet = $('#enterBet');
-let Deck = [];
+
+let round = 0;
+let trump = [];
 //const chatMessages = document.querySelector('.chat-messages');
 
 // Get username and room from URL
@@ -18,14 +20,6 @@ socket.on('roomUsers', ({ room, users}) => {
     outputRoomName(room);
     outputUsers(users); 
 });
-
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-}
-
 
 // MESSAGES FROM SERVER!!!!!!!!!!!!
 
@@ -55,14 +49,19 @@ socket.on('betChange', user => {
 })
 
 // Message from server
-socket.on('startGame', users => {
-    Deck = [];
-    for (let i = 0; i < 60; i++) {
-        Deck.push({cardID: i, img: `Image${i}.png`});
-    }
-    //shuffle
-    shuffleArray(Deck);
-    console.log(Deck);
+socket.on('drawHands', ({users, trump}) => {
+    user = users.filter(user => user.username === username)[0];
+    console.log(user);
+    let playerHand = $("#playerHandDiv");
+    let cards = user.cards;
+    console.log(cards);
+
+    playerHand.empty();
+    cards.forEach(card => {
+        playerHand.append(`<img src="assets/cards/${card.img}" class="img-thumbnail rounded w-100" style="height: 200px; max-width: 150px">
+        `);
+    });
+    $("#trumpImg").attr("src", `assets/cards/${trump.img}`);
 })
 
 
@@ -136,3 +135,4 @@ $('#start').on('click', function(event){
     // Emit a message to server
     socket.emit('startRequest', room);
 });
+
