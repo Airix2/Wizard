@@ -3,7 +3,7 @@ const path = require('path');
 const http = require('http');
 const socketio = require('socket.io');
 const formatMessage = require('./utils/messages');
-const { userJoin, getCurrentUser, userLeave, getRoomUsers, startGame } = require('./utils/users');
+const { userJoin, getCurrentUser, userLeave, getRoomUsers, startGame, removeCard } = require('./utils/users');
 let Deck = [];
 
 const app = express();
@@ -34,8 +34,11 @@ io.on('connection', socket => {
         // Broadcast when a user connects
         socket.broadcast.to(user.room).emit('message', formatMessage(botName, `${user.username} has joined the room`));
 
+        // to individual socketid (private message)
+        io.to(socket.id).emit('newUserNumber', user.playerNumber);
         // Send users and room info to view
         io.to(user.room).emit('roomUsers', {room: user.room, users: getRoomUsers(user.room)});
+        
     });
 
     
@@ -59,16 +62,32 @@ io.on('connection', socket => {
         io.to(room).emit('drawHands', {users: getRoomUsers(room), trump: trump});
     });
 
+    // Listen for a clicked card in a round
+    socket.on('cardClicked', ({room, username, cardSend}) => {
+        console.log(room, username, cardSend);
+        removeCard(username, cardSend);
+        socket.broadcast.to(room).emit('cardClickedServer', {usernameSent: username, cardSent: cardSend});
+
+        //let answer = checkTrickDone(room);
+    });
+
     // Broadcast to everybody when a user disconnects
     socket.on('disconnect', () => {
-        const user = userLeave(socket.id);
+        const userLeft = userLeave(socket.id);
         console.log('Exit Room...');
 
-        if (user) {
-            io.to(user.room).emit('message', formatMessage(botName, `${user.username} has left the chat`));
+        if (userLeft) {
+            io.to(userLeft.room).emit('message', formatMessage(botName, `${userLeft.username} has left the chat`));
+
+            // Send userself to every user in room
+            let users = getRoomUsers(userLeft.room)
+            users.forEach(user => {
+                io.to(user.id).emit('newUserNumber', user.playerNumber);
+            });
             
+
             // Send users and room info
-            io.to(user.room).emit('roomUsers', {room: user.room, users: getRoomUsers(user.room)});
+            io.to(userLeft.room).emit('roomUsers', {room: userLeft.room, users: getRoomUsers(userLeft.room)});
         }
     });
 })

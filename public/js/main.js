@@ -5,6 +5,8 @@ const playerEnterBet = $('#enterBet');
 
 let round = 0;
 let trump = [];
+let turn = 0;
+let playerNumber = -1;
 //const chatMessages = document.querySelector('.chat-messages');
 
 // Get username and room from URL
@@ -21,7 +23,13 @@ socket.on('roomUsers', ({ room, users}) => {
     outputUsers(users); 
 });
 
-// MESSAGES FROM SERVER!!!!!!!!!!!!
+// Get PlayerNumber
+socket.on('newUserNumber', number => {
+    playerNumber = number;
+});
+
+
+// MESSAGES FROM SERVER!!!!!!!!!!!!     qx
 
 
 // Message from server
@@ -58,11 +66,22 @@ socket.on('drawHands', ({users, trump}) => {
 
     playerHand.empty();
     cards.forEach(card => {
-        playerHand.append(`<img src="assets/cards/${card.img}" class="img-thumbnail rounded w-100 handCards" id="${card.ID}" style="height: 200px; max-width: 150px">
+        playerHand.append(`<img src="assets/cards/${card.img}" class="img-thumbnail rounded w-100 handCards" id="${card.ID}" style="height: 150px; max-width: 150px">
         `);
     });
     $("#trumpImg").attr("src", `assets/cards/${trump.img}`);
 })
+
+// Message from server
+socket.on('cardClickedServer', ({usernameSent, cardSent}) => {
+    let imgdiv = $(`#${usernameSent}`).children('img');
+    console.log(usernameSent, cardSent);
+    imgdiv.attr("src", cardSent.img);
+
+    turn++;
+})
+
+
 
 
 
@@ -109,9 +128,9 @@ function outputUsers(users){
     users.forEach(user => {
         let playerhtml = playerSpace.html();
         playerSpace.html(playerhtml + `<div class="col-2" id="${user.username}">
-        <label class="d-block my-0">${user.username}</label>
+        <label class="d-block my-0">${user.username} - ${playerNumber}</label>
         <div class="d-block bets"></div>
-        <img src="assets/cards/c1.png" class="img-thumbnail rounded w-100" style="height: 200px; max-width: 150px">
+        <img src="" class="img-thumbnail rounded w-100" style="height: 150px; max-width: 150px">
         </div>`);
     });
 }
@@ -138,12 +157,13 @@ $('#start').on('click', function(event){
 
 // Clicked on Card
 $('body').on('click', 'img.handCards', function() {
-        // Emit a message to server
-        let imgdiv = $(`#${username}`).children('img');
-        let imgsrc = $(this).attr("src");
-        let cardID = $(this).attr("id");
-        imgdiv.attr("src", imgsrc);
-        $(this).remove();
-        console.log(username, cardID);
-        socket.emit('cardClicked', {room, username, cardID});
+    // Emit a message to server
+    let imgdiv = $(`#${username}`).children('img');
+    let imgsrc = $(this).attr("src");
+    let cardID = $(this).attr("id");
+    let cardSend = {ID: cardID, img: imgsrc};
+    imgdiv.attr("src", imgsrc);
+    $(this).remove();
+    console.log(username, cardID);
+    socket.emit('cardClicked', {room, username, cardSend});
 });

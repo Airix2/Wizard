@@ -1,13 +1,14 @@
 const users = [];
-let trump = [];
 
 // Join user to chat
 function userJoin(id, username, room) {
+    let roomUsers = getRoomUsers(room);
+    var playerNumber = Object.keys(roomUsers).length;
     let bet = 0;
     let won = 0;
     let points = 0;
     let cards = [];
-    const user = { id, username, room, bet, won, points, cards };
+    const user = { id, username, room, bet, won, points, cards, playerNumber };
 
     users.push(user);
 
@@ -24,7 +25,15 @@ function userLeave(id) {
     const index = users.findIndex(user => user.id === id);
 
     if (index !== -1) {
-        return users.splice(index, 1)[0];
+        let room = users[index].room;
+        let answer = users.splice(index, 1)[0];
+
+        usersRoom = getRoomUsers(room);
+        usersRoom.forEach(function callback(user, index) {
+            user.playerNumber = index;
+        });
+
+        return answer;
     }
 }
 
@@ -41,9 +50,36 @@ function startGame(room) {
     //shuffle
     shuffleArray(Deck);
     console.log(Deck);
-    round = 1;
-    startRound(room);
+    let round = 2;
+    startRound(room, round);
     return trump;
+}
+
+// Get room users
+function removeCard(usernameSend, cardSend) {
+    const index = users.findIndex(user => user.username === usernameSend);
+
+    let indexCard = -1;
+    if (index !== -1) {
+        indexCard = users[index].cards.findIndex(card => users[index].cards.ID === cardSend.ID);
+    }
+
+    if (indexCard !== -1) {
+    console.log(cardSend, users[index].cards, indexCard);
+    users[index].cards.splice(indexCard, 1);
+    console.log(users[index].cards);
+    }
+}
+
+// Get room users
+function checkTrickDone(room) {
+    let cont = 0;
+    for (let index = 0; index < round; index++) {
+        users.filter(user => user.room === room).forEach(user => {
+            user.cards.push(Deck[cont]);
+            cont++;
+        });
+    }
 }
 
 module.exports = {
@@ -51,7 +87,8 @@ module.exports = {
     getCurrentUser,
     userLeave,
     getRoomUsers,
-    startGame
+    startGame,
+    removeCard
 }
 
 //functions that won't be exported
@@ -64,7 +101,7 @@ function shuffleArray(array) {
     }
 }
 
-function startRound(room) {
+function startRound(room, round) {
     users.filter(user => user.room === room).forEach(user => {
         user.cards = [];
     });
