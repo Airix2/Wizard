@@ -43,14 +43,10 @@ function getRoomUsers(room) {
 }
 
 function startGame(room) {
-    Deck = [];
-    for (let i = 1; i <= 60; i++) {
-        Deck.push({ID: i, img: `Image${i}.png`});
-    }
+    Deck = getDeck();
     //shuffle
     shuffleArray(Deck);
-    console.log(Deck);
-    let round = 2;
+    let round = 1;
     startRound(room, round);
     return trump;
 }
@@ -72,6 +68,13 @@ function removeCard(usernameSend, cardSend) {
 }
 
 // Get room users
+function newRound(room, round) {
+    Deck = getDeck();
+    shuffleArray(Deck);
+    startRound(room, round);
+}
+
+// Get room users
 function checkTrickDone(room) {
     let cont = 0;
     for (let index = 0; index < round; index++) {
@@ -88,7 +91,8 @@ module.exports = {
     userLeave,
     getRoomUsers,
     startGame,
-    removeCard
+    removeCard,
+    newRound
 }
 
 //functions that won't be exported
@@ -115,4 +119,12 @@ function startRound(room, round) {
     }
 
     trump = Deck[cont];
+}
+
+function getDeck() {
+    Deck = [];
+    for (let i = 1; i <= 60; i++) {
+        Deck.push({ID: i, img: `Image${i}.png`});
+    }
+    return Deck;
 }

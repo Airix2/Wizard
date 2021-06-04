@@ -7,6 +7,9 @@ let round = 0;
 let trump = [];
 let turn = 0;
 let playerNumber = -1;
+let cantPlayers = 0;
+
+let cardsPlayed = [];
 //const chatMessages = document.querySelector('.chat-messages');
 
 // Get username and room from URL
@@ -20,7 +23,8 @@ socket.emit('joinRoom', {username, room});
 // Get room and users
 socket.on('roomUsers', ({ room, users}) => {
     outputRoomName(room);
-    outputUsers(users); 
+    outputUsers(users);
+    cantPlayers = users.length;
 });
 
 // Get PlayerNumber
@@ -56,13 +60,15 @@ socket.on('betChange', user => {
     }
 })
 
-// Message from server
-socket.on('drawHands', ({users, trump}) => {
+// Server when First starting game or round
+socket.on('drawHands', ({users, trump, roundServer}) => {
+    cardsPlayed = [];
     user = users.filter(user => user.username === username)[0];
-    console.log(user);
+    round = roundServer;
+    console.log(round);
     let playerHand = $("#playerHandDiv");
     let cards = user.cards;
-    console.log(cards);
+    //console.log(cards);
 
     playerHand.empty();
     cards.forEach(card => {
@@ -75,11 +81,17 @@ socket.on('drawHands', ({users, trump}) => {
 // Message from server
 socket.on('cardClickedServer', ({usernameSent, cardSent}) => {
     let imgdiv = $(`#${usernameSent}`).children('img');
-    console.log(usernameSent, cardSent);
+    //console.log(usernameSent, cardSent);
     imgdiv.attr("src", cardSent.img);
+    cardsPlayed.push({card: cardSent.ID, username: usernameSent});
 
     turn++;
+    if (turn >= cantPlayers) {
+        turn = 0;
+    }
+    console.log(cardsPlayed);
 })
+
 
 
 
@@ -158,12 +170,27 @@ $('#start').on('click', function(event){
 // Clicked on Card
 $('body').on('click', 'img.handCards', function() {
     // Emit a message to server
-    let imgdiv = $(`#${username}`).children('img');
-    let imgsrc = $(this).attr("src");
-    let cardID = $(this).attr("id");
-    let cardSend = {ID: cardID, img: imgsrc};
-    imgdiv.attr("src", imgsrc);
-    $(this).remove();
-    console.log(username, cardID);
-    socket.emit('cardClicked', {room, username, cardSend});
+    if (turn == playerNumber) {
+        let imgdiv = $(`#${username}`).children('img');
+        let imgsrc = $(this).attr("src");
+        let cardID = $(this).attr("id");
+        let cardSend = {ID: cardID, img: imgsrc};
+        imgdiv.attr("src", imgsrc);
+        $(this).remove();
+        console.log(username, cardID);
+        socket.emit('cardClicked', {room, username, cardSend});
+        cardsPlayed.push({card: cardID, username: username});
+
+        console.log(cardsPlayed);
+        turn++;
+
+        if (turn >= cantPlayers) {
+            turn = 0;
+            socket.emit('trickDone', {room});
+        }
+        if (round == cardsPlayed.length/cantPlayers) {
+            round++;
+            socket.emit('roundDone', {room, round});
+        }
+    }
 });
