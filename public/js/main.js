@@ -33,7 +33,7 @@ socket.on('newUserNumber', number => {
 });
 
 
-// MESSAGES FROM SERVER!!!!!!!!!!!!     qx
+// MESSAGES FROM SERVER!!!!!!!!!!!!     
 
 
 // Message from server

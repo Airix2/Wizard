@@ -1,14 +1,4 @@
-.fill-height { flex-grow: 1; width: 100%; }
-
-.center-all {
-	justify-content: center !important;
-	text-align: center;
-}
-
-body {
-	color: white;
-}
-
+/* Para hacer los dots de apuestas */
 .dot {
 	height: 10px;
 	width: 10px;
@@ -18,4 +8,107 @@ body {
 }
 .bet-green {
 	background-color: rgb(26, 236, 26);
+}
+/* ^^ Para hacer los dots de apuestas */
+
+/* /////////////////////////////////////////////////////////// */
+/* INDEX PRINCIPAL */
+body {
+	color: white;
+	background-color: #4486af;
+	width: 100%;
+	margin: 0;
+}
+
+.grid-container-index {
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	grid-column-gap: 10px;
+}
+
+header {
+	grid-column: 2 / span 10;
+	grid-row: 1 / 2;
+	padding-bottom: 3em;
+	padding-top: 1em;
+}
+
+main {
+	grid-column: 5 / span 4;
+	grid-row: 2 / 3;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+form > * {
+	display: block;
+	margin: 0.5em;
+}
+
+form > button {
+	align-self: center;
+}
+
+h1 {
+	text-align: center;
+}
+
+/* /////////////////////////////////////////////////////////// */
+/* INICIA LA PARTE DE PAGINA DEL JUEGO */
+
+a {
+	color: white;
+}
+a:hover {
+	color: white;
+	text-decoration: none;
+}
+
+.grid-container {
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	grid-template-rows: 5vh 30vh 30vh 35vh;
+	grid-column-gap: 10px;
+
+	justify-content: center;
+
+	background-color: #254b62;
+}
+
+.nav-row {
+	grid-row: 1 / 2;
+	grid-column: 1 / -1;
+	background-color: #1d3e53;
+	display: flex;
+}
+
+.nav-row > * {
+	justify-content: space-around;
+	flex-grow: 1;
+	text-align: center;
+}
+
+.trump-row {
+	grid-row: 2 / 3;
+	grid-column: 1 / -1;
+	display: flex;
+	justify-content: center;
+}
+
+.players-row {
+	grid-row: 3 / 4;
+	grid-column: 1 / -1;
+	display: flex;
+	justify-content: center;
+}
+
+.self-row {
+	grid-row: 4 / 5;
+	grid-column: 1 / -1;
+	display: flex;
+	justify-content: center;
 }

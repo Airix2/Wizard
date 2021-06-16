@@ -19,36 +19,27 @@
         integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     
     <!-- CSS -->
-    <link rel="stylesheet" href="C:\Users\Alex\Documents\Javascript Node\Wizard\public\css\style.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
 
     <title>Wizard</title>
 </head>
 <body>
-    <div class="container-flex vh-100" style="background-color: #254b62;">
-		<header class="join-header text-center">
+    <div class="grid-container-index">
+		<header class="text-center">
 			<h1><i class="fas fa-smile"></i> Wizard</h1>
 		</header>
 		<main class="join-main">
+			<h1>Log In</h1>
 			<form action="game.html">
-				<div class="form-control">
-					<label for="username">Wizard</label>
-					<input
-						type="text"
-						name="username"
-						id="username"
-						placeholder="Enter username..."
-						required
-					/>
-				</div>
-				<div class="form-control">
-					<label for="room">Room</label>
-					<select name="room" id="room">
-						<option value="Room1">Room #1</option>
-						<option value="Room2">Room #2</option>
-						<option value="Room3">Room #3</option>
-					</select>
-				</div>
-				<button type="submit" class="btn">Join Chat</button>
+				<label for="username">Wizard</label>
+				<input type="text" name="username" id="username" placeholder="Enter username..." required/>
+				<label for="room">Room</label>
+				<select name="room" id="room">
+					<option value="Room1">Room #1</option>
+					<option value="Room2">Room #2</option>
+					<option value="Room3">Room #3</option>
+				</select>
+				<button type="submit" class="btn btn-primary">Join Chat</button>
 			</form>
 		</main>
 	</div>

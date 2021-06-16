@@ -24,25 +24,19 @@
     <title>Wizard</title>
 </head>
 <body>
-    <div class="container-flex vh-100" style="background-color: #254b62;">
-        <div class="row mx-0" style="height: 5vh; background-color: #1d3e53;">
-            <div class="col py-2 text-center">
-                <p class="h4">Username</p>
-            </div>
-            <div class="col py-2 text-center">
-                <p class="h4" id="roomName"></p>
-            </div>
-            <div class="col py-2 text-center">
-                <p class="h4">Leave Room</p>
-            </div>
+    <div class="grid-container vh-100">
+        <div class="nav-row">
+            <span class="h4">Username</span>
+            <span class="h4" id="roomName"></span>
+            <a class="h4" href="index.html">Leave Room</a>
         </div>
-        <div class="row mx-0 center-all" style="height: 30vh;">
+        <div class="trump-row">
             <div class="col-2 pt-2">
                 <label class="d-block">Trump</label>
                 <img src="" id="trumpImg" class="img-thumbnail rounded w-100"  style="height: 150px; max-width: 150px">
             </div>
         </div>
-        <div class="row mx-0 center-all" style="height: 30vh;" id="playerSpace">
+        <div class="players-row" id="playerSpace">
             <!-- <div class="col-2">
                 <label class="d-block my-0">Players</label>
                 <div class="d-block bets">
@@ -54,7 +48,7 @@
             </div> -->
         </div>
 
-        <div class="row mx-0 center-all align-items-center" style="height: 35vh;">
+        <div class="self-row align-items-center">
             <div class="col-10" id="playerHandDiv">
             </div>
             <div class="col-2">
