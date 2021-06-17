@@ -1,5 +1,6 @@
 const chatForm = document.getElementById('chat-form');
 const roomName = $('#roomName');
+const userNameNav = $('#userNameNav');
 const playerSpace = $('#playerSpace');
 const playerEnterBet = $('#enterBet');
 
@@ -72,7 +73,7 @@ socket.on('drawHands', ({users, trump, roundServer}) => {
 
     playerHand.empty();
     cards.forEach(card => {
-        playerHand.append(`<img src="assets/cards/${card.img}" class="img-thumbnail rounded w-100 handCards" id="${card.ID}" style="height: 150px; max-width: 150px">
+        playerHand.append(`<img src="assets/cards/${card.img}" class="img-thumbnail rounded handCards" id="${card.ID}" style="width: 110px">
         `);
     });
     $("#trumpImg").attr("src", `assets/cards/${trump.img}`);
@@ -117,21 +118,10 @@ $('#chat-form').on('submit', function(event){
     msgInput.focus();
 });
 
-
-// Output message to DOM
-function outputMessage(message){
-    let div = document.createElement('div');
-    div.classList.add('message');
-    div.innerHTML = `<p class="meta">${message.username} <span>${message.time}</span></p>
-    <p class="text">
-        ${message.text}
-    </p>`;
-    document.querySelector('.chat-messages').appendChild(div);
-}
-
 // Output Roomname to DOM
 function outputRoomName(room){
     roomName.text("WIZARD: "+room);
+    userNameNav.text(username);
 }
 
 // Output Users Space to DOM
@@ -139,10 +129,10 @@ function outputUsers(users){
     playerSpace.html("");
     users.forEach(user => {
         let playerhtml = playerSpace.html();
-        playerSpace.html(playerhtml + `<div class="col-2" id="${user.username}">
-        <label class="d-block my-0">${user.username} - ${playerNumber}</label>
+        playerSpace.html(playerhtml + `<div class="players-hands" id="${user.username}">
+        <label class="d-block my-0">${user.username} - PlayerNumber: ${playerNumber}</label>
         <div class="d-block bets"></div>
-        <img src="" class="img-thumbnail rounded w-100" style="height: 150px; max-width: 150px">
+        <img src="assets/cards/BackCard.png" class="img-thumbnail rounded" style="width: 110px;">
         </div>`);
     });
 }

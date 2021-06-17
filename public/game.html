@@ -26,14 +26,14 @@
 <body>
     <div class="grid-container vh-100">
         <div class="nav-row">
-            <span class="h4">Username</span>
+            <span class="h4" id="userNameNav">Username</span>
             <span class="h4" id="roomName"></span>
             <a class="h4" href="index.html">Leave Room</a>
         </div>
         <div class="trump-row">
             <div class="col-2 pt-2">
                 <label class="d-block">Trump</label>
-                <img src="" id="trumpImg" class="img-thumbnail rounded w-100"  style="height: 150px; max-width: 150px">
+                <img src="assets/cards/BackCard.png" id="trumpImg" class="img-thumbnail rounded"  style="width: 110px">
             </div>
         </div>
         <div class="players-row" id="playerSpace">
@@ -48,13 +48,15 @@
             </div> -->
         </div>
 
-        <div class="self-row align-items-center">
-            <div class="col-10" id="playerHandDiv">
+        <div class="self-row align-items-center border">
+            <div class="player-hand" id="playerHandDiv">
             </div>
-            <div class="col-2">
-                <button class="btn btn-light my-2" id="start">Start Game</button>
-                <input type="number" id="bet-text">
-                <button class="btn btn-light" id="enterBet">Bet</button>
+            <div class="buttons">
+                <button class="btn btn-light my-2 w-100" id="start">Start Game</button>
+                <span>
+                    <input type="number" style="width: 6rem;" id="bet-text">
+                    <button class="btn btn-light" id="enterBet">Bet</button>
+                </span>
             </div>
         </div>
     </div>
