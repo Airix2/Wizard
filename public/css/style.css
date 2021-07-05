@@ -1,4 +1,24 @@
-/* Para hacer los dots de apuestas */
+
+/* 
+==================================================
+CLASES GENERALES
+==================================================
+*/
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+body {
+	color: white;
+	background-color: #4486af;
+}
+
+/* 
+==================================================
+PARA HACER LOS DOTS DE LAS APUESTAS
+==================================================
+*/
 .dot {
 	height: 10px;
 	width: 10px;
@@ -9,57 +29,44 @@
 .bet-green {
 	background-color: rgb(26, 236, 26);
 }
-/* ^^ Para hacer los dots de apuestas */
 
-/* /////////////////////////////////////////////////////////// */
-/* INDEX PRINCIPAL */
-body {
-	color: white;
-	background-color: #4486af;
-	width: 100%;
-	margin: 0;
+/* 
+==================================================
+INDEX PRINCIPAL
+==================================================
+*/
+.login {
+	width: 30%;
+	margin: 0 auto;
 }
-
-.grid-container-index {
-	display: grid;
-	grid-template-columns: repeat(12, 1fr);
-	grid-column-gap: 10px;
+.login header {
+	margin: 16px 0 48px 0;
 }
-
-header {
-	grid-column: 2 / span 10;
-	grid-row: 1 / 2;
-	padding-bottom: 3em;
-	padding-top: 1em;
-}
-
-main {
-	grid-column: 5 / span 4;
-	grid-row: 2 / 3;
-}
-
-form {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-}
-
-form > * {
-	display: block;
-	margin: 0.5em;
-}
-
-form > button {
-	align-self: center;
-}
-
-h1 {
+.login h1 {
 	text-align: center;
 }
+.login form {
+	padding-top: 0.5rem;
+	display: grid;
+	grid-template-columns: 1fr;
+	justify-content: left;
+	gap: 0.5rem;
+}
+form input[type=text], form select {
+	height: 28px;
+} 
+form label {
+	margin: 0;
+}
+form select {
+	margin-bottom: 0.5rem;
+}
 
-/* /////////////////////////////////////////////////////////// */
-/* INICIA LA PARTE DE PAGINA DEL JUEGO */
-
+/* 
+==================================================
+INICIA LA PARTE DE PAGINA DEL JUEGO
+==================================================
+*/
 a {
 	color: white;
 }
@@ -67,31 +74,25 @@ a:hover {
 	color: white;
 	text-decoration: none;
 }
-
 .grid-container {
 	display: grid;
 	grid-template-columns: repeat(12, 1fr);
 	grid-template-rows: 5vh 30vh 30vh 35vh;
 	grid-column-gap: 10px;
-
 	justify-content: center;
-
 	background-color: #254b62;
 }
-
 .nav-row {
 	grid-row: 1 / 2;
 	grid-column: 1 / -1;
 	background-color: #1d3e53;
 	display: flex;
 }
-
 .nav-row > * {
 	justify-content: space-around;
 	flex-grow: 1;
 	text-align: center;
 }
-
 .trump-row {
 	grid-row: 2 / 3;
 	grid-column: 1 / -1;
@@ -99,19 +100,16 @@ a:hover {
 	justify-content: center;
 	text-align: center;
 }
-
 .players-row {
 	grid-row: 3 / 4;
 	grid-column: 1 / -1;
 	display: flex;
 	justify-content: center;
 }
-
 .players-hands {
 	flex-grow: 1;
 	text-align: center;
 }
-
 .self-row {
 	grid-row: 4 / 5;
 	grid-column: 1 / -1;
@@ -122,7 +120,6 @@ a:hover {
 	align-content: start;
 	grid-gap: 1em;
 }
-
 .player-hand {
 	grid-column: 3 / 11;
 	display:flex;
@@ -131,13 +128,11 @@ a:hover {
 	align-content: start;
 	overflow-x: auto;
 }
-
 .buttons {
 	grid-column: 11 / 13;
 	margin-right: 1rem;
 	align-self: start;
 }
-
 .handCards {
 	margin: 1rem 0.5rem;
 }
