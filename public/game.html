@@ -24,18 +24,25 @@
     <title>Wizard</title>
 </head>
 <body>
-    <div class="grid-container vh-100">
-        <div class="nav-row">
+    <section class="game">
+        <!-- Game Navbar -->
+        <nav class="nav-bar">
             <span class="h4" id="userNameNav">Username</span>
             <span class="h4" id="roomName"></span>
             <a class="h4" href="index.html">Leave Room</a>
-        </div>
+        </nav>
+        <!-- End of Game Navbar -->
+        
+        <!-- Trump Row -->
         <div class="trump-row">
-            <div class="col-2 pt-2">
+            <div class="py-2">
                 <label class="d-block">Trump</label>
                 <img src="assets/cards/BackCard.png" id="trumpImg" class="img-thumbnail rounded"  style="width: 110px">
             </div>
         </div>
+        <!-- End of Trump Row -->
+        
+        <!-- Players Hands Row -->
         <div class="players-row" id="playerSpace">
             <!-- <div class="col-2">
                 <label class="d-block my-0">Players</label>
@@ -47,8 +54,10 @@
                 <img src="assets/cards/c1.png" class="img-thumbnail rounded w-100" style="height: 200px; max-width: 150px">
             </div> -->
         </div>
-
-        <div class="self-row align-items-center border">
+        <!-- End of Players Hands Row -->
+        
+        <!-- Self Hand Row -->
+        <div class="self-row border">
             <div class="player-hand" id="playerHandDiv">
             </div>
             <div class="buttons">
@@ -59,7 +68,8 @@
                 </span>
             </div>
         </div>
-    </div>
+        <!-- End of Self Hand Row -->
+    </section>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.10.1/qs.min.js"
     integrity="sha512-aTKlYRb1QfU1jlF3k+aS4AqTpnTXci4R79mkdie/bp6Xm51O5O3ESAYhvg6zoicj/PD6VYY0XrYwsWLcvGiKZQ==" 

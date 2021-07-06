@@ -129,7 +129,7 @@ function outputUsers(users){
     playerSpace.html("");
     users.forEach(user => {
         let playerhtml = playerSpace.html();
-        playerSpace.html(playerhtml + `<div class="players-hands" id="${user.username}">
+        playerSpace.html(playerhtml + `<div class="player-hand" id="${user.username}">
         <label class="d-block my-0">${user.username} - PlayerNumber: ${playerNumber}</label>
         <div class="d-block bets"></div>
         <img src="assets/cards/BackCard.png" class="img-thumbnail rounded" style="width: 110px;">
