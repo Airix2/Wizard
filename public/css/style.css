@@ -36,7 +36,8 @@ INDEX PRINCIPAL
 ==================================================
 */
 .login {
-	width: 30%;
+	width: 80%;
+	max-width: 512px;
 	margin: 0 auto;
 }
 .login header {
